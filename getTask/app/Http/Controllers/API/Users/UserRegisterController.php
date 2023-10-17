@@ -20,7 +20,9 @@ class UserRegisterController extends Controller
                 $user->password = Hash::make($request->input('password'));
                 if($user->save())
                     DB::commit();
+                    $token =  $user->createToken('auth_token')->plainTextToken;
                     return response([
+                        'token'=> $token,
                         'user' => $user,
                         'message' => 'User Created with sucess'
                     ], 200);
