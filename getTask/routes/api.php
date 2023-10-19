@@ -36,6 +36,7 @@ Route::group(['middleware' => ['auth:sanctum','admin']], function () {
             });
             Route::get('/all/admin', [UserFunctionController::class,'allAdmin']);
             Route::get('/show/{id}', [UserFunctionController::class,'show']);
+            Route::delete('/delete/{id}', [UserFunctionController::class,'show']);
         }
     );   
 }); 

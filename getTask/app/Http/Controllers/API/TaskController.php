@@ -106,4 +106,12 @@ class TaskController extends Controller
         return response(['message'=>'Task dont created'],400);
 
     }
+
+    public function delete($id){
+        $task = Task::findOrFail($id);
+        if ($task) {
+            $task->delete();
+            return response(['message'=>'Task deleted with sucess']);
+        }
+    }
 }
