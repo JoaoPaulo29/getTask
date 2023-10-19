@@ -22,18 +22,21 @@ class UserRegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
-            'name' => 'required|text',
-            'password' => 'required',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|string|min:4',
         ];
     }
     public function messages(): array
     {
         return [
-            'email.required' => 'O campo EMAIL é obrigatório!',
-            'email.email' => 'O campo EMAIL deve ser do tipo email!',
-            'password.required' => 'O campo Senha é obrigatório!',
-            'password.min' => 'Deve conter no min 6 carateres',
+            'name.required' => 'O campo nome é obrigatório.',
+            'name.max' => 'O campo nome não pode ter mais de :max caracteres.',
+            'email.required' => 'O campo endereço de e-mail é obrigatório.',
+            'email.email' => 'Digite um endereço de e-mail válido.',
+            'email.unique' => 'Este endereço de e-mail já está em uso.',
+            'password.required' => 'O campo senha é obrigatório.',
+            'password.min' => 'A senha deve ter no mínimo :min caracteres.', 
         ];
     }
 }

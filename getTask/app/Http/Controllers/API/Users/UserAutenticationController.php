@@ -3,15 +3,12 @@
 namespace App\Http\Controllers\API\Users;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Users\UserAutenticationRequest; 
+use App\Http\Requests\Users\UserAutenticationRequest;
+use Illuminate\Support\Facades\Request;
 
 class UserAutenticationController extends Controller
 {
-
-    public function __construct() { 
-        $this->middleware('auth:sanctum')->only('logout');
-    }
-
+ 
     public function login(UserAutenticationRequest $request){
        
          
@@ -26,8 +23,8 @@ class UserAutenticationController extends Controller
         ],200);
     }
 
-    public function logout(UserAutenticationRequest $request){
-        $request->user()->currentAccessToken()->delete();
-        return $this->responseSeccess([],'Logout feito',200);
+    public function logout(Request $request){ 
+        $request::user()->tokens()->delete();
+        return  response( ['message' =>'The user is logout'],200);
     }
 }
